@@ -1,93 +1,99 @@
+
+
 <?php
 session_start();
 include "includes/functions.php";
 singUp();
 ?>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>
-        PharmEasy
-    </title>
-    <link rel="icon" href="images/logo.png" type="image/icon type">
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="icon" href="favicon.png">
+    <link rel="stylesheet" href="css/register.css">
+    <title>Sign Up</title>
+   
 </head>
-<!------ Include the above in your HEAD tag ---------->
-<div class="container">
-    <div id="signupbox" style=" margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-
-
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <div class="panel-title">Sign Up</div>
+<body>
+    <div class="wrapper">
+        <nav class="nav">
+            <div class="nav-logo">
+                <img style="width: 120px;" src="favicon.png" alt="logo">
             </div>
-            <?php
-
-            message();
-            ?>
-            <div class="panel-body">
-                <form id="signupform" class="form-horizontal" role="form" method="post" action="signUp.php">
-                    <div class="form-group">
-                        <label for="email" class="col-md-3 control-label">Email</label>
-                        <div class="col-md-9">
-                            <input type="text" class="form-control" name="email" placeholder="Email Address">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-md-3 control-label">First Name</label>
-                        <div class="col-md-9">
-                            <input type="text" class="form-control" name="Fname" placeholder="First Name">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="lastname" class="col-md-3 control-label">Last Name</label>
-                        <div class="col-md-9">
-                            <input type="text" class="form-control" name="Lname" placeholder="Last Name">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="address" class="col-md-3 control-label">Address</label>
-                        <div class="col-md-9">
-                            <input type="text" class="form-control" name="address" placeholder="Address">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="password" class="col-md-3 control-label">Password</label>
-                        <div class="col-md-9">
-                            <input type="password" class="form-control" name="passwd" placeholder="Password">
-                        </div>
-                    </div>
-                    <div style=" margin-left: 39px;">
-                        <b> Password must contain the following:</b>
-                        <ul>
-                            <li>at least 1 number and 1 letter</li>
-                            <li>Must be 8-30 characters</li>
-                        </ul>
-                    </div>
-
-
-                    <div class="form-group">
-                        <!-- Button -->
-                        <div class="col-sm-12 controls">
-                            <input id="btn-login" class="btn btn-success" type="submit" value="Sign Up" name="singUp" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-12 control">
-                            <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%">
-                                You are already have an account?!
-                                <a href="login.php">
-                                    Sign In Here
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                </form>
-
+            <div class="nav-menu" id="navMenu">
+                <ul>
+                    <li><a href="#" class="link active">Home</a></li>
+                    <li><a href="#" class="link">About</a></li>
+                    <li><a href="members.html" class="link">Members</a></li>
+                    <li><a href="#" class="link">Customers</a></li>
+                </ul>
             </div>
+            <div class="nav-btns">
+                
+                <a href="login.php"><button class="l-btn" id="loginBtn">Sign In</button></a>
+                <button class="s-btn" id="registerBtn">Sign Up</button>
+
+        </div>
+        <div class="nav-menu-btn">
+            <i class="bx bx-menu" onclick="myMenuFunction()"></i>
+        </div>
+        </nav>
+
+        <div class="form-box">
+        <?php
+
+message();
+?>
+           
+            <form class="register-container" id="register" action="signUp.php" method="post">
+                <div class="top">
+                    <span>Already have an account? <a href="login.php">Login</a></span>
+                    <header>Sign Up to Curenet</header>
+                </div>
+                <div class="two-forms">
+                    <div class="input-box">
+                        <input type="text" class="input-field" placeholder="Firstname" name="Fname">
+                        <i class="bx bx-user"></i>
+                    </div>
+                    <div class="input-box">
+                        <input type="text" class="input-field" placeholder="Lastname" name="Lname">
+                        <i class="bx bx-user"></i>
+                    </div>
+                </div>
+                <div class="input-box">
+                    <input type="text" class="input-field" placeholder="Email" name="email">
+                    <i class="bx bx-envelope"></i>
+                </div>
+                <div class="input-box">
+                    <input type="password" class="input-field" placeholder="Password" name="passwd">
+                    <i class="bx bx-lock-alt"></i>
+                </div>
+                <div class="input-box">
+                    <input type="password" class="input-field" placeholder="Address..." name="address">
+                    <i class="bx bx-lock-alt"></i>
+                </div>
+                <div class="input-box">
+                    
+                    <input type="submit" class="submit" value="Register" name="singUp">
+
+                </div>
+            </form>
         </div>
     </div>
-</div>
+    <script>
+   
+        function myMenuFunction() {
+           var i = document.getElementById("navMenu");
+       
+           if(i.className === "nav-menu") {
+               i.className += " responsive";
+           } else {
+               i.className = "nav-menu";
+           }
+          }
+        
+       </script>
+</body>
+</html>

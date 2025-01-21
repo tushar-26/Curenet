@@ -1,4 +1,4 @@
-<div class="site-navbar py-2">
+<div class="site-navbar py-2" style="background: linear-gradient(to right, white,grey);">
 
     <div class="search-wrap">
         <div class="container">
@@ -23,7 +23,7 @@
                         <li><a href="store.php?store=all">Medicines</a></li>
                         <li class="has-children">
                             <a href="#">Categories</a>
-                            <ul class="dropdown">
+                            <ul class="dropdown" >
                                 <li><a href="store.php?cat=medicine">Medicine</a></li>
                                 <li><a href="store.php?cat=self-care">Self Care</a></li>
                                 <li><a href="store.php?cat=medicine">machine</a></li>

@@ -18,5 +18,5 @@ include "includes/functions.php";
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
     <link rel="stylesheet" href="css/aos.css">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" href="../images/favicon.png" type="image/icon type">
+    <link rel="icon" href="images/favicon.png" type="image/icon type">
 </head>
