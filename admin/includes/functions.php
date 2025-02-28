@@ -1,7 +1,7 @@
 <?php
 $connection = mysqli_connect("localhost", "root", "", "Pharma");
 // $connection = mysqli_connect("localhost", "id18666014_pharma1", "tXU!y/6D\EH_{<[6", "id18666014_pharma");
-    // query functions (start)
+// query functions (start)
 function query($query)
 {
     global $connection;
@@ -48,54 +48,54 @@ function get_redirect($url)
 // messages function (start)
 function message()
 {
-    if(isset($_SESSION['message'])){
-    if ($_SESSION['message'] == "loginErr") {
-        echo "   <div class='alert alert-danger' role='alert'>
+    if (isset($_SESSION['message'])) {
+        if ($_SESSION['message'] == "loginErr") {
+            echo "   <div class='alert alert-danger' role='alert'>
         There is no account with this email !!!
       </div>";
-        unset($_SESSION['message']);
-    } elseif ($_SESSION['message'] == "emailErr") {
-        echo "   <div class='alert alert-danger' role='alert'>
+            unset($_SESSION['message']);
+        } elseif ($_SESSION['message'] == "emailErr") {
+            echo "   <div class='alert alert-danger' role='alert'>
         The email address is already taken.  Please choose another
       </div>";
-        unset($_SESSION['message']);
-    } elseif ($_SESSION['message'] == "loginErr1") {
-        echo "   <div class='alert alert-danger' role='alert'>
+            unset($_SESSION['message']);
+        } elseif ($_SESSION['message'] == "loginErr1") {
+            echo "   <div class='alert alert-danger' role='alert'>
         The email or password is wrong!
       </div>";
-        unset($_SESSION['message']);
-    } elseif ($_SESSION['message'] == "noResult") {
-        echo "   <div class='alert alert-danger' role='alert'>
+            unset($_SESSION['message']);
+        } elseif ($_SESSION['message'] == "noResult") {
+            echo "   <div class='alert alert-danger' role='alert'>
         There is no user with this email address .
       </div>";
-        unset($_SESSION['message']);
-    } elseif ($_SESSION['message'] == "itemErr") {
-        echo "   <div class='alert alert-danger' role='alert'>
+            unset($_SESSION['message']);
+        } elseif ($_SESSION['message'] == "itemErr") {
+            echo "   <div class='alert alert-danger' role='alert'>
         There is a product with the same name .
       </div>";
-        unset($_SESSION['message']);
-    } elseif ($_SESSION['message'] == "noResultOrder") {
-        echo "   <div class='alert alert-danger' role='alert'>
+            unset($_SESSION['message']);
+        } elseif ($_SESSION['message'] == "noResultOrder") {
+            echo "   <div class='alert alert-danger' role='alert'>
         There is no order with this ID !!!
       </div>";
-        unset($_SESSION['message']);
-    } elseif ($_SESSION['message'] == "noResultItem") {
-        echo "   <div class='alert alert-danger' role='alert'>
+            unset($_SESSION['message']);
+        } elseif ($_SESSION['message'] == "noResultItem") {
+            echo "   <div class='alert alert-danger' role='alert'>
         There is no product with this name !!!
       </div>";
-        unset($_SESSION['message']);
-    } elseif ($_SESSION['message'] == "noResultAdmin") {
-        echo "   <div class='alert alert-danger' role='alert'>
+            unset($_SESSION['message']);
+        } elseif ($_SESSION['message'] == "noResultAdmin") {
+            echo "   <div class='alert alert-danger' role='alert'>
         There is no admin with this email !!!
       </div>";
-        unset($_SESSION['message']);
-    } elseif ($_SESSION['message'] == "empty_err") {
-        echo "   <div class='alert alert-danger' role='alert'>
+            unset($_SESSION['message']);
+        } elseif ($_SESSION['message'] == "empty_err") {
+            echo "   <div class='alert alert-danger' role='alert'>
     please don't leave anything empty !!!
   </div>";
-        unset($_SESSION['message']);
+            unset($_SESSION['message']);
+        }
     }
-}
 }
 // messages function (end)
 // login function (start)
@@ -303,7 +303,7 @@ function add_item()
             $run = single_query($query);
             get_redirect("products.php");
         } else {
-            $_SESSION['message'] = "itemErr";
+            $_SESSION['message'] = "itemError";
             get_redirect("products.php");
         }
     } elseif (isset($_POST['cancel'])) {

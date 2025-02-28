@@ -110,7 +110,7 @@ include "includes/head.php";
                         <tr>
                             <td><?php echo $data[$i]['user_id'] ?></td>
                             <td><?php echo $data[$i]['user_fname'] ?></td>
-                            <td><?php echo $data[$i]['user_lname'] ?></td>
+                            <td><?php echo $data[$i]['user_Lname'] ?></td>
                             <td><?php echo $data[$i]['email'] ?></td>
                             <td><?php echo $data[$i]['user_address'] ?></td>
                             <td>

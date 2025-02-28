@@ -1,5 +1,3 @@
-
-
 <?php
 session_start();
 include "includes/functions.php";
@@ -7,20 +5,22 @@ singUp();
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="icon" href="favicon.png">
+    <link rel="icon" href="images/favicon.png">
     <link rel="stylesheet" href="css/register.css">
     <title>Sign Up</title>
-   
+
 </head>
+
 <body>
     <div class="wrapper">
         <nav class="nav">
             <div class="nav-logo">
-                <img style="width: 120px;" src="favicon.png" alt="logo">
+                <img style="width: 120px;" src="images/favicon.png" alt="logo">
             </div>
             <div class="nav-menu" id="navMenu">
                 <ul>
@@ -31,22 +31,22 @@ singUp();
                 </ul>
             </div>
             <div class="nav-btns">
-                
+
                 <a href="login.php"><button class="l-btn" id="loginBtn">Sign In</button></a>
                 <button class="s-btn" id="registerBtn">Sign Up</button>
 
-        </div>
-        <div class="nav-menu-btn">
-            <i class="bx bx-menu" onclick="myMenuFunction()"></i>
-        </div>
+            </div>
+            <div class="nav-menu-btn">
+                <i class="bx bx-menu" onclick="myMenuFunction()"></i>
+            </div>
         </nav>
 
         <div class="form-box">
-        <?php
+            <?php
 
-message();
-?>
-           
+            message();
+            ?>
+
             <form class="register-container" id="register" action="signUp.php" method="post">
                 <div class="top">
                     <span>Already have an account? <a href="login.php">Login</a></span>
@@ -75,7 +75,7 @@ message();
                     <i class="bx bx-lock-alt"></i>
                 </div>
                 <div class="input-box">
-                    
+
                     <input type="submit" class="submit" value="Register" name="singUp">
 
                 </div>
@@ -83,17 +83,16 @@ message();
         </div>
     </div>
     <script>
-   
         function myMenuFunction() {
-           var i = document.getElementById("navMenu");
-       
-           if(i.className === "nav-menu") {
-               i.className += " responsive";
-           } else {
-               i.className = "nav-menu";
-           }
-          }
-        
-       </script>
+            var i = document.getElementById("navMenu");
+
+            if (i.className === "nav-menu") {
+                i.className += " responsive";
+            } else {
+                i.className = "nav-menu";
+            }
+        }
+    </script>
 </body>
+
 </html>

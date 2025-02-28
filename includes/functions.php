@@ -108,7 +108,8 @@ function singUp()
         }
     }
 }
-function message()
+
+/*function message()
 {
     if(isset($_SESSION['message'])){
 
@@ -135,7 +136,7 @@ function message()
             unset($_SESSION['message']);
         } elseif ($_SESSION['message'] == "empty_err") {
             echo "   <div class='alert alert-danger' role='alert'>
-        please don't leave anything empty !!!
+        please don't leave anything emptyy !!!
       </div>";
             unset($_SESSION['message']);
         } elseif ($_SESSION['message'] == "signup_err_email") {
@@ -146,7 +147,42 @@ function message()
         }
     }
 }
+}*/
+function message()
+{
+    if (isset($_SESSION['message'])) {
+        echo "<div class='container mt-3'>"; // Container for proper spacing
+        
+        $message_type = $_SESSION['message'];
+        unset($_SESSION['message']); // Clear message immediately after retrieval
+
+        $messages = [
+            "signup_err_password" => "Please enter the password in correct format (8-30 chars, at least 1 letter and 1 number)!",
+            "loginErr" => "The email or password is incorrect!",
+            "usedEmail" => "This email is already registered!",
+            "wentWrong" => "Something went wrong! Please try again.",
+            "empty_err" => "Please fill in all required fields!",
+            "signup_err_email" => "Please enter a valid email address!"
+        ];
+
+        if (array_key_exists($message_type, $messages)) {
+            echo "<div class='alert alert-danger alert-dismissible fade show' role='alert' style='color: red; font-weight:bold; font-family: Verdana;background-color: white; padding: 40px; border: solid red 8px;'>
+                    {$messages[$message_type]}
+                   
+                  </div>
+                  <script>
+                    // Auto-dismiss after 5 seconds
+                    setTimeout(() => {
+                        document.querySelector('.alert').remove();
+                    }, 4000);
+                  </script>";
+        }
+
+        echo "</div>"; // Close container
+    }
 }
+
+
 function search()
 {
     if (isset($_GET['search'])) {
@@ -326,5 +362,82 @@ function delivery_fees($data)
         return $num * 40;
     } else {
         return 0;
+    }
+}
+
+function get_user_details($user_id) {
+    global $connection;
+    $query = "SELECT user_id, user_fname, user_lname, email, user_address FROM user WHERE user_id = '$user_id'";
+    $result = mysqli_query($connection, $query);
+    if ($result) {
+        return mysqli_fetch_assoc($result);
+    } else {
+        return null;
+    }
+}
+
+function get_user_orders($user_id) {
+    global $connection;
+    $query = "SELECT order_id, item_id, order_quantity, order_date, order_status FROM orders WHERE user_id = '$user_id'";
+    $result = mysqli_query($connection, $query);
+    $orders = [];
+    if ($result) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $orders[] = $row;
+        }
+    }
+    return $orders;
+}
+
+function update_user_profile($user_id, $username, $email, $password) {
+    global $connection;
+    $username = mysqli_real_escape_string($connection, $username);
+    $email = mysqli_real_escape_string($connection, $email);
+    $password = mysqli_real_escape_string($connection, $password);
+
+
+    $query = "UPDATE user SET user_fname = '$username', email = '$email', user_password = '$password' WHERE user_id = '$user_id'";
+    return mysqli_query($connection, $query);
+}
+
+function delete_user_order($order_id) {
+    global $connection;
+    $query = "DELETE FROM orders WHERE order_id = '$order_id'";
+    return mysqli_query($connection, $query);
+}
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
+
+function send_otp_email($email, $otp) {
+    $mail = new PHPMailer(true);
+
+    try {
+        // Server settings
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com'; // Set the SMTP server to send through
+        $mail->SMTPAuth = true;
+        $mail->Username = 'your_email@gmail.com'; // SMTP username
+        $mail->Password = 'your_email_password'; // SMTP password
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port = 587;
+
+        // Recipients
+        $mail->setFrom('your_email@gmail.com', 'Your Name');
+        $mail->addAddress($email);
+
+        // Content
+        $mail->isHTML(true);
+        $mail->Subject = 'Your OTP for Password Change';
+        $mail->Body = "Your OTP for changing your password is: $otp. This OTP is valid for 5 minutes.";
+
+        $mail->send();
+        echo 'OTP has been sent';
+    } catch (Exception $e) {
+        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
 }

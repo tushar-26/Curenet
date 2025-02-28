@@ -173,7 +173,7 @@ include "includes/head.php"
                 <p>Tushar</p>
               </div>
 
-             <div class="testimony">
+              <div class="testimony">
                 <blockquote>
                   <img src="https://i.pinimg.com/736x/ed/ce/24/edce24dac160f5674b58a87cd7a056ee.jpg" alt="Image" class="img-fluid w-25 mb-4 rounded-circle">
                   <p>What stands out about Curent is their regular discounts and offers on medicines. These deals make buying medicines more affordable, especially for long-term treatments. However, I think the website could improve by adding more filtering options to refine searches</p>
@@ -182,7 +182,7 @@ include "includes/head.php"
                 <p>miss unknown</p>
               </div>
 
-            
+
 
             </div>
           </div>

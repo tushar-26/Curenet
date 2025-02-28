@@ -35,8 +35,8 @@ include "includes/head.php";
             </div>
         </div>
         <?php
-        if(isset($_SESSION['id'])){
-        edit_item($_SESSION['id']);
+        if (isset($_SESSION['id'])) {
+            edit_item($_SESSION['id']);
         }
         if (isset($_GET['edit'])) {
             $_SESSION['id'] = $_GET['edit'];
@@ -59,10 +59,12 @@ include "includes/head.php";
                 <div class="input-group mb-3 form-group">
                     <label class="input-group-text" for="inputGroupSelect01">category</label>
                     <select name="cat" class="form-select" id="inputGroupSelect01">
-                        <option selected>Choose...</option>
+                        <option selected>Choose..d.</option>
                         <option value="medicine">medicine</option>
                         <option value="self-care">self-care</option>
                         <option value="machine">machine</option>
+                        <option value="vitamin">vitamin</option>
+
                     </select>
                 </div>
                 <div class="form-group">
@@ -166,7 +168,7 @@ include "includes/head.php";
                         <th scope="col">#</th>
                         <th scope="col">ID</th>
                         <th scope="col">Name</th>
-                    
+
                         <th>
                             <button type="button" class="btn btn-outline-primary"><a style="text-decoration: none; color:black;" href="products.php?add=1"> &nbsp;&nbsp;Add&nbsp;&nbsp;</a></button>
                         </th>

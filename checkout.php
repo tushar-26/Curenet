@@ -6,7 +6,6 @@ include "includes/head.php"
 
   <div class="site-wrap">
 
-
     <?php
     include "includes/header.php";
     $data = get_user($_SESSION['user_id']);
@@ -34,8 +33,7 @@ include "includes/head.php"
                 <div class="p-3 p-lg-5 border">
                   <table class="table site-block-order-table mb-5">
                     <thead>
-
-                      <th>Costumer Details</th>
+                      <th>Customer Details</th>
                     </thead>
                     <tbody>
                       <tr>
@@ -105,8 +103,62 @@ include "includes/head.php"
                   </table>
 
                   <div class="form-group">
-                    <button class="btn btn-primary btn-lg btn-block" onclick="window.location='thankyou.php?order=done'">Place
-                      Order</button>
+                    <h3 class="h4 mb-3 text-black">Payment Options</h3>
+                    <div class="border p-3 mb-3">
+                      <h4 class="h5 mb-3">Debit Card</h4>
+                      <form action="thankyou.php?order=done" method="post">
+                        <div class="form-group">
+                          <label for="card_name">Name on Card</label>
+                          <input type="text" class="form-control" id="card_name" name="card_name" required>
+                        </div>
+                        <div class="form-group">
+                          <label for="card_number">Card Number</label>
+                          <input type="text" class="form-control" id="card_number" name="card_number" required>
+                        </div>
+                        <div class="form-group">
+                          <label for="card_expiry">Expiry Date</label>
+                          <input type="date" class="form-control" id="card_expiry" name="card_expiry" required>
+                        </div>
+                        <div class="form-group">
+                          <label for="card_cvv">CVV</label>
+                          <input type="text" class="form-control" id="card_cvv" name="card_cvv" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg btn-block">Pay with Debit Card</button>
+                      </form>
+                    </div>
+
+                    <div class="border p-3 mb-3">
+                      <h4 class="h5 mb-3">QR Code</h4>
+                      <p>Scan the QR code below to pay:</p>
+                      <img src="images/qr.jpg" alt="QR Code" class="img-fluid mb-3" style="max-width: 200px;">
+                      <form action="thankyou.php?order=done" method="post">
+                        <button type="submit" class="btn btn-primary btn-lg btn-block">Pay with QR Code</button>
+                      </form>
+                    </div>
+
+                    <div class="border p-3 mb-3">
+                      <h4 class="h5 mb-3" style="display: inline-block;">UPI Payment</h4>
+                      
+                        <img src="images/googlepay.png" alt="Google Pay" class="img-fluid" style="max-width: 55px; margin-right: 10px;">
+                        <img src="images/phonepe.png" alt="PhonePe" class="img-fluid" style="max-width: 42px;">
+                      
+                      <p>Enter your UPI ID to pay:</p>
+                      <form action="thankyou.php?order=done" method="post">
+                        <div class="form-group">
+                          <label for="upi_id">UPI ID</label>
+                          <input type="text" class="form-control" id="upi_id" name="upi_id" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg btn-block">Pay with UPI</button>
+                      </form>
+                     
+                    </div>
+
+                    <div class="border p-3 mb-3">
+                      <h4 class="h5 mb-3">Cash on Delivery</h4>
+                      <form action="thankyou.php?order=done" method="post">
+                        <button type="submit" class="btn btn-primary btn-lg btn-block">Pay with Cash on Delivery</button>
+                      </form>
+                    </div>
                   </div>
 
                 </div>
@@ -122,6 +174,7 @@ include "includes/head.php"
     include "includes/footer.php"
     ?>
   </div>
+
 </body>
 
 </html>

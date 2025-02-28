@@ -1,5 +1,3 @@
-
-
 <?php
 session_start();
 include "includes/functions.php";
@@ -7,15 +5,17 @@ login();
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="icon" href="favicon.png">
+    <link rel="icon" href="images/favicon.png">
     <link rel="stylesheet" href="css/login.css">
     <title>Login</title>
-   
+
 </head>
+
 <body>
     <div class="wrapper">
         <nav class="nav">
@@ -31,9 +31,9 @@ login();
                 </ul>
             </div>
             <div class="nav-btns">
-                
-                  <button class="l-btn" id="loginBtn">Sign In</button>
-                  <a href="signUp.php"><button class="s-btn" id="registerBtn">Sign Up</button></a>
+
+                <button class="l-btn" id="loginBtn">Sign In</button>
+                <a href="signUp.php"><button class="s-btn" id="registerBtn">Sign Up</button></a>
 
             </div>
             <div class="nav-menu-btn">
@@ -42,11 +42,11 @@ login();
         </nav>
 
         <div class="form-box">
-        <?php
+            <?php
 
-message();
+            message();
 
-?>
+            ?>
             <form class="login-container" id="login" action="login.php" method="post">
                 <div class="top">
                     <span>if you dont have a account<a href="signUP.php" onclick="register()">Sign Up</a></span>
@@ -60,7 +60,7 @@ message();
                     <input type="password" class="input-field" placeholder="Enter Password" name="password">
                     <i class="bx bx-lock-alt"></i>
                 </div>
-               
+
                 <div class="input-box">
                     <input type="submit" class="submit" value="Sign In" name="login">
                 </div>
@@ -73,22 +73,22 @@ message();
                         <label><a href="#">Forgot password?</a></label>
                     </div>
                 </div>
+                <div style="text-align: center; margin-top:50px; color:azure;">click here for<a style="color:aqua; margin-left: 4px;" href="admin/index.php">Admin login</a></div>
             </form>
-            
+
         </div>
     </div>
     <script>
-   
         function myMenuFunction() {
-           var i = document.getElementById("navMenu");
-       
-           if(i.className === "nav-menu") {
-               i.className += " responsive";
-           } else {
-               i.className = "nav-menu";
-           }
-          }
-        
-       </script>
+            var i = document.getElementById("navMenu");
+
+            if (i.className === "nav-menu") {
+                i.className += " responsive";
+            } else {
+                i.className = "nav-menu";
+            }
+        }
+    </script>
 </body>
+
 </html>

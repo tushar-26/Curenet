@@ -13,7 +13,7 @@ login();
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 </head>
-<!------ Include the above in your HEAD tag ---------->
+<body style="background: linear-gradient(to right, rgb(37, 105, 105), rgb(24, 109, 120));">
 <div class="container">
     <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
         <div class="panel panel-info">
@@ -69,3 +69,4 @@ login();
 
 </div>
 </div>
+</body>
