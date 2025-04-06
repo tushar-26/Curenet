@@ -59,11 +59,13 @@ include "includes/head.php";
                 <div class="input-group mb-3 form-group">
                     <label class="input-group-text" for="inputGroupSelect01">category</label>
                     <select name="cat" class="form-select" id="inputGroupSelect01">
-                        <option selected>Choose..d.</option>
-                        <option value="medicine">medicine</option>
-                        <option value="self-care">self-care</option>
-                        <option value="machine">machine</option>
-                        <option value="vitamin">vitamin</option>
+                        <option selected>Choose..</option>
+                        <option value="Digestive Health">Digestive Health</option>
+                        <option value="pain relief">pain relief</option>
+                        <option value="skin-care">skin-care</option>
+                        <option value="vitamin">vitamins</option>
+                        <option value="cold-caugh-fever">cold-caugh-fever</option>
+
 
                     </select>
                 </div>
@@ -121,10 +123,12 @@ include "includes/head.php";
                 <div class="input-group mb-3 form-group">
                     <label class="input-group-text" for="inputGroupSelect01">category</label>
                     <select name="cat" class="form-select" id="inputGroupSelect01">
-                        <option value="" selected>Choose...</option>
-                        <option value="medicine">medicine</option>
-                        <option value="self-care">self-care</option>
-                        <option value="machine">machine</option>
+                    <option selected>Choose..</option>
+                        <option value="Digestive Health">Digestive Health</option>
+                        <option value="pain relief">pain relief</option>
+                        <option value="skin-care">skin-care</option>
+                        <option value="vitamin">vitamins</option>
+                        <option value="cold-caugh-fever">cold-caugh-fever</option>
                     </select>
                 </div>
                 <div class="form-group">

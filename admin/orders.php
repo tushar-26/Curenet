@@ -71,45 +71,46 @@ include "includes/head.php";
                             <td><?php echo $data[$i]['item_id'] ?></td>
                             <td><?php echo $data[$i]['order_quantity'] ?></td>
                             <td><?php echo $data[$i]['order_date'] ?></td>
-                            <?php if ($data[$i]['order_status'] == 1) {
-                            ?>
+                            <?php if ($data[$i]['order_status'] == 1) { ?>
                                 <td style="color: green;">
                                     shipped
                                 </td>
-                            <?php
-                            } else {
-                            ?>
+                            <?php } elseif ($data[$i]['order_status'] == 2) { ?>
+                                <td style="color: orange;">
+                                    out for delivery
+                                </td>
+                            <?php } else { ?>
                                 <td style="color: red;">
                                     pending
                                 </td>
-                            <?php
-                            }
-                            ?>
+                            <?php } ?>
                             <td>
-                                <button type="button" class="btn  btn-outline-danger"><a style="text-decoration: none; color:black;" href="orders.php?delete=<?php echo $data[$i]['order_id'] ?>">Delete</a></button>
+                                <button type="button" class="btn btn-outline-danger"><a style="text-decoration: none; color:black;" href="orders.php?delete=<?php echo $data[$i]['order_id'] ?>">Delete</a></button>
                             </td>
 
-                            <?php if ($data[$i]['order_status'] == 1) {
-                            ?>
+                            <?php if ($data[$i]['order_status'] == 1) { ?>
                                 <td>
-                                    <button type="button" class="btn  btn-outline-danger"><a style="text-decoration: none; color:black;" href="orders.php?undo=<?php echo $data[$i]['order_id'] ?>">&nbsp;Undo&nbsp;</a></button>
+                                    <button type="button" class="btn btn-outline-danger"><a style="text-decoration: none; color:black;" href="orders.php?undo=<?php echo $data[$i]['order_id'] ?>">&nbsp;Undo&nbsp;</a></button>
                                 </td>
-                            <?php
-                            } else {
-                            ?>
+                            <?php } else { ?>
                                 <td>
-                                    <button type="button" class="btn  btn-outline-success"><a style="text-decoration: none; color:black;" href="orders.php?done=<?php echo $data[$i]['order_id'] ?>">&nbsp;Done&nbsp;</a></button>
-
+                                    <button type="button" class="btn btn-outline-success"><a style="text-decoration: none; color:black;" href="orders.php?done=<?php echo $data[$i]['order_id'] ?>">&nbsp;Done&nbsp;</a></button>
                                 </td>
-                            <?php
-                            }
-                            ?>
+                            <?php } ?>
                             <td>
-                                <button type="button" class="btn  btn-outline-info"><a style="text-decoration: none; color:black;" href="customers.php?id=<?php echo $data[$i]['user_id'] ?>"> &nbsp;User details&nbsp; </a></button>
+                                <?php if ($data[$i]['order_status'] == 1) { ?>
+                                    <button type="button" class="btn btn-outline-warning"><a style="text-decoration: none; color:black;" href="orders.php?out_for_delivery=<?php echo $data[$i]['order_id'] ?>">&nbsp;Out for Delivery&nbsp;</a></button>
+                                <?php } elseif ($data[$i]['order_status'] == 2) { ?>
+                                    <button type="button" class="btn btn-outline-warning" disabled>&nbsp;Out for Delivered&nbsp;</button>
+                                <?php } else { ?>
+                                    <button type="button" class="btn btn-outline-warning" disabled>&nbsp;Out for Delivery&nbsp;</button>
+                                <?php } ?>
                             </td>
                             <td>
-                                <button type="button" class="btn  btn-outline-info"><a style="text-decoration: none; color:black;" href="products.php?id=<?php echo $data[$i]['item_id'] ?>">Product details</a></button>
-
+                                <button type="button" class="btn btn-outline-info"><a style="text-decoration: none; color:black;" href="customers.php?id=<?php echo $data[$i]['user_id'] ?>"> &nbsp;User details&nbsp; </a></button>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-outline-info"><a style="text-decoration: none; color:black;" href="products.php?id=<?php echo $data[$i]['item_id'] ?>">Product details</a></button>
                             </td>
                         </tr>
                     <?php

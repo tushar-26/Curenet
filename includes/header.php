@@ -1,4 +1,4 @@
-<div class="site-navbar py-2" style="background: linear-gradient(to right, white,grey);">
+<div class="site-navbar py-2" style="background-color: white; ">
 
     <div class="search-wrap">
         <div class="container">
@@ -11,27 +11,27 @@
     <div class="container">
         <div class="d-flex align-items-center justify-content-between">
             <div class="logo">
-                <div class="site-logo">
-                    <h3 style="display: inline-block; color:red;">CURENET</h3>
+                <div class="site-logo" >
+                    <h3 style="display: inline-block; color:skyblue;">CURENET</h3>
                     <a href="index.php" class="js-logo-clone"><img src="images/favicon.png" style="width:130px; height: 70px;"></a>
                 </div>
             </div>
-            <div class="main-nav d-none d-lg-block">
+            <div class="main-nav d-none d-lg-block" >
                 <nav class="site-navigation text-right text-md-center" role="navigation">
                     <ul class="site-menu js-clone-nav d-none d-lg-block">
-                        <li><a href="index.php">Home</a></li>
-                        <li><a href="store.php?store=all">Medicines</a></li>
+                        <li><a href="index.php" style="font-weight: bold;">Home</a></li>
+                        <li><a href="store.php?store=all" style="font-weight: bold;">Medicines</a></li>
                         <li class="has-children">
-                            <a href="#">Categories</a>
+                            <a href="#" style="font-weight: bold;">Categories</a>
                             <ul class="dropdown">
-                                <li><a href="store.php?cat=medicine">Skin Care</a></li>
-                                <li><a href="store.php?cat=self-care">Pain Relief</a></li>
-                                <li><a href="store.php?cat=medicine">Digestive Health</a></li>
-                                <li><a href="store.php?cat=medicine">Vitamins</a></li>
-                                <li><a href="store.php?cat=medicine">flu-like symptoms</a></li>
+                                <li><a href="store.php?cat=Digestive Health">Digestive Health</a></li>
+                                <li><a href="store.php?cat=pain relief">pain relief</a></li>
+                                <li><a href="store.php?cat=skin-care">skin-care</a></li>
+                                <li><a href="store.php?cat=vitamin">vitamins</a></li>
+                                <li><a href="store.php?cat=cold-caugh-fever">cold-caugh-fever</a></li>
                             </ul>
                         </li>
-                        <li><a href="about.php">About</a></li>
+                        <li><a href="about.php" style="font-weight: bold;">About</a></li>
                     </ul>
                 </nav>
             </div>

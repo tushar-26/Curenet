@@ -114,10 +114,10 @@ include "includes/head.php";
                             <td><?php echo $data[$i]['email'] ?></td>
                             <td><?php echo $data[$i]['user_address'] ?></td>
                             <td>
-                                <button type="button" class="btn pull-left btn-outline-warning"><a style="text-decoration: none; color:black;" href="customers.php?edit=<?php echo $data[$i]['user_id'] ?>">Edit</a></button>
+                               <!-- <button type="button" class="btn pull-left btn-outline-warning"><a style="text-decoration: none; color:black;" href="customers.php?edit=<?php echo $data[$i]['user_id'] ?>">Edit</a></button>-->
                             </td>
                             <td>
-                                <button type="button" class="btn pull-left btn-outline-danger"><a style="text-decoration: none; color:black;" href="customers.php?delete=<?php echo $data[$i]['user_id'] ?>">Delete</a></button>
+                               <!-- <button type="button" class="btn pull-left btn-outline-danger"><a style="text-decoration: none; color:black;" href="customers.php?delete=<?php echo $data[$i]['user_id'] ?>">Delete</a></button>-->
                             </td>
                         </tr>
                     <?php  }

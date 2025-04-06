@@ -127,7 +127,7 @@ include "includes/head.php"
                 <div class="  text-center item mb-4">
                   <a href="product.php?product_id=<?php echo $data[$i]['item_id'] ?>"> <img class="rounded mx-auto d-block" style="width:20vw ; height:vh ;" src="images/<?php echo $data[$i]['item_image'] ?>" alt="Image"></a>
 
-                  <h3 class="text-dark"><a href="product.php?product_id=<?php echo $data[$i]['item_id'] ?>">Umcka Cold Care</a></h3>
+                  <h3 class="text-dark"><a href="product.php?product_id=<?php echo $data[$i]['item_id'] ?>"><?php echo $data[$i]['item_title'] ?></a></h3>
 
                   <p class="price">₹<?php echo $data[$i]['item_price'] ?></p>
                 </div>
@@ -166,7 +166,7 @@ include "includes/head.php"
 
               <div class="testimony">
                 <blockquote>
-                  <img src="https://media-bom2-4.cdn.whatsapp.net/v/t61.24694-24/471404890_1074239224714991_8120618315123128839_n.jpg?ccb=11-4&oh=01_Q5AaIOKsi2ZONPlc0ApsOptsMFt7BXQm3RkxJTLeIJEd6IqW&oe=679C7299&_nc_sid=5e03e0&_nc_cat=109" alt="Image" class="img-fluid w-25 mb-4 rounded-circle">
+                  <img src="https://media-bom2-3.cdn.whatsapp.net/v/t61.24694-24/477945644_1647618579233109_8963213940205191299_n.jpg?ccb=11-4&oh=01_Q5AaIUdvOc9ZcOl5g7-IoAGe0fV492XlWvJ-O3dNv6AlTqdg&oe=67FCE658&_nc_sid=5e03e0&_nc_cat=107" alt="Image" class="img-fluid w-25 mb-4 rounded-circle">
                   <p>I love how Curent collaborates with local pharmacies to fulfill orders. It supports small businesses and ensures that medicines are sourced quickly. The website also offers health tips and articles, which add value to the user experience</p>
                 </blockquote>
 
@@ -175,7 +175,7 @@ include "includes/head.php"
 
               <div class="testimony">
                 <blockquote>
-                  <img src="https://i.pinimg.com/736x/ed/ce/24/edce24dac160f5674b58a87cd7a056ee.jpg" alt="Image" class="img-fluid w-25 mb-4 rounded-circle">
+                  <img src="https://play-lh.googleusercontent.com/_qUtBpMVsGY-CLPx2DreAENHAbr4KHwBGn2w_3jhGSzoRVFRKn0SXUaK0wXSU0SJ7A=w480-h960-rw" alt="Image" class="img-fluid w-25 mb-4 rounded-circle">
                   <p>What stands out about Curent is their regular discounts and offers on medicines. These deals make buying medicines more affordable, especially for long-term treatments. However, I think the website could improve by adding more filtering options to refine searches</p>
                 </blockquote>
 

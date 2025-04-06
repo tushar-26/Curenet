@@ -1,5 +1,5 @@
 <?php
-$connection = mysqli_connect("localhost", "root", "", "Pharma");
+$connection = mysqli_connect("localhost", "root", "", "pharma");
 // $connection = mysqli_connect("localhost", "id18666014_pharma1", "tXU!y/6D\EH_{<[6", "id18666014_pharma");
 // query functions (start)
 function query($query)
@@ -99,31 +99,41 @@ function message()
 }
 // messages function (end)
 // login function (start)
+
 function login()
 {
     if (isset($_POST['login'])) {
-
         $adminEmail = trim($_POST['adminEmail']);
         $password = trim(strtolower($_POST['adminPassword']));
-        $query = "SELECT  admin_email , admin_id , admin_password FROM admin WHERE admin_email= '$adminEmail' ";
+
+        // Fetch all matching rows
+        $query = "SELECT admin_id, admin_password FROM admin WHERE admin_email = '$adminEmail'";
         $data = query($query);
-        if ($data == 0) {
+
+
+        if (empty($data)) { // No user found
             $_SESSION['message'] = "loginErr";
             post_redirect("login.php");
-        } elseif ($password == $data[0]['admin_password'] and  $adminEmail == $data[0]['admin_email']) {
-            $_SESSION['admin_id'] = $data[0]['admin_id'];
-            post_redirect("index.php");
         } else {
+            foreach ($data as $row) { // Loop through results (in case of multiple entries)
+                if ($password == $row['admin_password']) {
+                    $_SESSION['admin_id'] = $row['admin_id'];
+                    post_redirect("index.php");
+                    return; // Stop further checking after successful login
+                }
+            }
+            // If no match is found in the loop
             $_SESSION['message'] = "loginErr1";
             post_redirect("login.php");
         }
     }
 }
+
 // login function (end)
 // user functions (start)
 function all_users()
 {
-    $query = "SELECT user_id ,user_fname ,user_lname ,email ,user_address FROM user";
+    $query = "SELECT user_id ,user_fname ,user_Lname ,email ,user_address FROM user";
     $data = query($query);
     return $data;
 }
@@ -177,6 +187,7 @@ function check_email_user($email)
         return 0;
     }
 }
+
 function search_user()
 {
     if (isset($_GET['search_user'])) {
@@ -184,9 +195,12 @@ function search_user()
         if (empty($email)) {
             return;
         }
-        $query = "SELECT user_id ,user_fname ,user_lname ,email ,user_address FROM user WHERE email='$email'";
+
+        // Use LIKE for partial search
+        $query = "SELECT user_id, user_fname, user_Lname, email, user_address FROM user WHERE email LIKE '%$email%'";
         $data = query($query);
-        if ($data) {
+
+        if (!empty($data)) {
             return $data;
         } else {
             $_SESSION['message'] = "noResult";
@@ -194,6 +208,7 @@ function search_user()
         }
     }
 }
+
 function get_user_details()
 {
     if ($_GET['id']) {
@@ -220,7 +235,8 @@ function delete_item()
         get_redirect("products.php");
     }
 }
-function edit_item($id)
+
+/*function edit_item($id)
 {
     if (isset($_POST['update'])) {
         $name = trim($_POST['name']);
@@ -240,6 +256,68 @@ function edit_item($id)
             get_redirect("products.php");
         } else {
             $_SESSION['message'] = "itemErr";
+            get_redirect("products.php");
+        }
+    } elseif (isset($_POST['cancel'])) {
+        get_redirect("products.php");
+    }
+}*/
+function edit_item($id) {
+    if (isset($_POST['update'])) {
+        $name = trim($_POST['name']);
+        $brand = trim($_POST['brand']);
+        $cat = trim($_POST['cat']);
+        $tags = trim($_POST['tags']);
+        $image = trim($_POST['image']);
+        $quantity = trim($_POST['quantity']);
+        $price = trim($_POST['price']);
+        $details = trim($_POST['details']);
+
+        // Fetch the existing item data
+        $existing_data = get_item($id);
+        if (empty($existing_data)) {
+            $_SESSION['message'] = "noResultItem";
+            get_redirect("products.php");
+            return;
+        }
+
+        // Use existing data if the field is not provided in the form
+        $name = !empty($name) ? $name : $existing_data[0]['item_title'];
+        $brand = !empty($brand) ? $brand : $existing_data[0]['item_brand'];
+        $cat = !empty($cat) ? $cat : $existing_data[0]['item_cat'];
+        $tags = !empty($tags) ? $tags : $existing_data[0]['item_tags'];
+        $image = !empty($image) ? $image : $existing_data[0]['item_image'];
+        $quantity = !empty($quantity) ? $quantity : $existing_data[0]['item_quantity'];
+        $price = !empty($price) ? $price : $existing_data[0]['item_price'];
+        $details = !empty($details) ? $details : $existing_data[0]['item_details'];
+
+        // Check if the name is unique (if changed)
+        if ($name !== $existing_data[0]['item_title']) {
+            $check = check_name($name);
+            if ($check == 1) {
+                $_SESSION['message'] = "itemErr";
+                get_redirect("products.php");
+                return;
+            }
+        }
+
+        // Update the item with all fields
+        $query = "UPDATE item SET 
+                  item_title='$name', 
+                  item_brand='$brand', 
+                  item_cat='$cat', 
+                  item_details='$details', 
+                  item_tags='$tags', 
+                  item_image='$image', 
+                  item_quantity='$quantity', 
+                  item_price='$price' 
+                  WHERE item_id='$id'";
+
+        $run = single_query($query);
+        if ($run) {
+            get_redirect("products.php");
+        } else {
+            $_SESSION['message'] = "empty_err";
             get_redirect("products.php");
         }
     } elseif (isset($_POST['cancel'])) {
@@ -445,23 +523,151 @@ function search_order()
         }
     }
 }
-function delete_order()
-{
+function update_order_status($order_id, $status) {
+    global $connection;
+    $stmt = $connection->prepare("UPDATE orders SET order_status = ? WHERE order_id = ?");
+    $stmt->bind_param("ii", $status, $order_id);
+    $stmt->execute();
+    $stmt->close();
+}
+
+function delete_order() {
     if (isset($_GET['delete'])) {
         $order_id = $_GET['delete'];
         $query = "DELETE FROM orders WHERE order_id ='$order_id'";
-        $run = single_query($query);
+        single_query($query);
         get_redirect("orders.php");
     } elseif (isset($_GET['done'])) {
         $order_id = $_GET['done'];
-        $query = "UPDATE orders SET order_status = 1 WHERE order_id='$order_id'";
-        single_query($query);
+        update_order_status($order_id, 1); // 1 indicates shipped
         get_redirect("orders.php");
     } elseif (isset($_GET['undo'])) {
         $order_id = $_GET['undo'];
-        $query = "UPDATE orders SET order_status = 0 WHERE order_id='$order_id'";
-        single_query($query);
+        update_order_status($order_id, 0); // 0 indicates pending
+        get_redirect("orders.php");
+    } elseif (isset($_GET['out_for_delivery'])) {
+        $order_id = $_GET['out_for_delivery'];
+        update_order_status($order_id, 2); // 2 indicates out for delivery
         get_redirect("orders.php");
     }
 }
 // order functions (end)
+
+//functions start for report
+function get_order_report()
+{
+    $query = "SELECT * FROM orders ORDER BY order_date DESC";
+    $data = query($query);
+    return $data;
+}
+
+function calculate_total_revenue($data)
+{
+    $total = 0;
+    foreach ($data as $order) {
+        if ($order['order_status'] == 1) { // Assuming 1 means 'Completed'
+            $item = get_item_id($order['item_id']);
+            $total += $item[0]['item_price'] * $order['order_quantity'];
+        }
+    }
+    return $total;
+}
+
+function count_pending_payments($data)
+{
+    $count = 0;
+    foreach ($data as $order) {
+        if ($order['order_status'] == 0) { // Assuming 0 means 'Pending'
+            $count++;
+        }
+    }
+    return $count;
+}
+
+function count_completed_transactions($data)
+{
+    $count = 0;
+    foreach ($data as $order) {
+        if ($order['order_status'] == 1) { // Assuming 1 means 'Completed'
+            $count++;
+        }
+    }
+    return $count;
+}
+// Add these functions to your existing functions.php file
+
+function calculate_total_expenses($data)
+{
+    // Assuming expenses are calculated based on some logic, for example, cost price of items
+    $total_expenses = 0;
+    foreach ($data as $order) {
+        $item = get_item_id($order['item_id']);
+        $cost_price = $item[0]['item_price'] * 0.7; // Assuming cost price is 70% of selling price
+        $total_expenses += $cost_price * $order['order_quantity'];
+    }
+    return $total_expenses;
+}
+
+function get_top_selling_products()
+{
+    $query = "SELECT item_id, SUM(order_quantity) as total_quantity FROM orders GROUP BY item_id ORDER BY total_quantity DESC LIMIT 5";
+    $data = query($query);
+    $top_selling_products = [];
+    foreach ($data as $item) {
+        $item_details = get_item_id($item['item_id']);
+        $top_selling_products[] = $item_details[0]['item_title'];
+    }
+    return $top_selling_products;
+}
+
+function calculate_customer_growth_rate()
+{
+    $query = "SELECT COUNT(user_id) as total_users FROM user";
+    $data = query($query);
+    $total_users = $data[0]['total_users'];
+
+    // Assuming you have a way to get the number of users from the previous period
+    $previous_period_users = 50; // Example value
+    $growth_rate = (($total_users - $previous_period_users) / $previous_period_users) * 100;
+    return $growth_rate;
+}
+
+function get_inventory_levels()
+{
+    $query = "SELECT item_title, item_quantity FROM item";
+    $data = query($query);
+    $inventory_levels = [];
+    foreach ($data as $item) {
+        $inventory_levels[] = $item['item_title'] . ": " . $item['item_quantity'];
+    }
+    return $inventory_levels;
+}
+
+function get_monthly_performance()
+{
+    $query = "SELECT DATE_FORMAT(order_date, '%Y-%m') as month, SUM(order_quantity) as total_quantity FROM orders GROUP BY month ORDER BY month DESC";
+    $data = query($query);
+    $monthly_performance = [];
+    foreach ($data as $month) {
+        $monthly_performance[] = $month['month'] . ": " . $month['total_quantity'];
+    }
+    return $monthly_performance;
+}
+
+function get_yearly_performance()
+{
+    $query = "SELECT DATE_FORMAT(order_date, '%Y') as year, SUM(order_quantity) as total_quantity FROM orders GROUP BY year ORDER BY year DESC";
+    $data = query($query);
+    $yearly_performance = [];
+    foreach ($data as $year) {
+        $yearly_performance[] = $year['year'] . ": " . $year['total_quantity'];
+    }
+    return $yearly_performance;
+}
+
+function get_item_id($id)
+{
+    $query = "SELECT * FROM item WHERE item_id= '$id'";
+    $data = query($query);
+    return $data;
+}

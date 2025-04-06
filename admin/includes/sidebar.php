@@ -37,6 +37,12 @@
                     Go to store
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="payment-management-report.php">
+                    <span data-feather="package"></span>
+                    report-analysis
+                </a>
+            </li>
         </ul>
     </div>
 </nav>
